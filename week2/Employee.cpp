@@ -1,6 +1,6 @@
 #include "Employee.h"
 
-bool Employee::validateName(char* n)
+bool Employee::validateName(const char* n)
 {
 	int i = 0;
 	for (i; n[i] != '\0'; i++) {
@@ -11,7 +11,7 @@ bool Employee::validateName(char* n)
 	return i > 0;
 }
 
-int Employee::charlen(char* n)
+int Employee::charlen(const char* n)
 {
 	int size = 0;
 
@@ -20,13 +20,23 @@ int Employee::charlen(char* n)
 	return size;
 }
 
-void Employee::setName(char* fName, char* lName)
+void Employee::setName(const char* fName,const char* lName)
 {
 	if (!validateName(fName)) return;
 	if (!validateName(lName)) return;
 
-	name.first = fName;
-	name.last = lName;
+	int fNameSize = charlen(fName);
+	int lNameSize = charlen(lName);
+
+	name.first = new char[fNameSize + 1];
+	name.last = new char[lNameSize + 1];
+
+	int idx = 0;
+	for (idx = 0; fName[idx]!='\0'; idx++) name.first[idx] = fName[idx];
+	name.first[idx] = '\0';
+
+	for (idx = 0; lName[idx] != '\0'; idx++) name.last[idx] = lName[idx];
+	name.last[idx] = '\0';
 }
 
 void Employee::setWork(int h, double s)

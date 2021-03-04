@@ -16,10 +16,10 @@ private:
 	Name name;
 	Work work;
 
-	bool validateName(char* n);
-	int charlen(char* n);
+	bool validateName(const char* n);
+	int charlen(const char* n);
 public:
-	void setName(char* fName, char* lName);
+	void setName(const char* fName,const char* lName);
 	void setWork(int h, double s);
 
 	char* getName();
